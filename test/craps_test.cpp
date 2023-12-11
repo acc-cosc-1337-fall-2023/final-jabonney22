@@ -2,6 +2,7 @@
 #include "catch.hpp"
 #include "die.h"
 #include "roll.h"
+#include "shooter.h"
 
 TEST_CASE("Verify Test Configuration", "verification") {
 	REQUIRE(true == true);
@@ -41,4 +42,23 @@ TEST_CASE("Testing roll roll class functions")
 		REQUIRE(roll.roll_value() >= 2);
 		REQUIRE(roll.roll_value() <= 12);
 	}
+}
+
+TEST_CASE("Testing shooter throw die class functions")
+{
+	srand((unsigned) time(NULL));
+	Die dice1;
+	Die dice2;
+	Shooter shooter;
+	Roll* roll = shooter.throw_die(dice1,dice2);
+	REQUIRE(roll->roll_value() >= 2);
+	REQUIRE(roll->roll_value() <= 12);
+	for(int i = 0; i < 10; i++)
+	{
+		roll = shooter.throw_die(dice1,dice2);
+		std::cout<<roll->roll_value()<<"\n";
+		REQUIRE(roll->roll_value() >= 2);
+		REQUIRE(roll->roll_value() <= 12);
+	}
+
 }
